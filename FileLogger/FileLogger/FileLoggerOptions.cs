@@ -41,6 +41,11 @@ namespace FileLogger
 		/// </summary>
 		public int RetainFileCount { get; set; } = 10;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool LocalTime { get; set; }
+
 		public FileLoggerOptions()
 		{
 		}

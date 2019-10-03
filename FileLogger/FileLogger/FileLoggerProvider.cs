@@ -30,7 +30,8 @@ namespace FileLogger
 			{
 				using (var writer = new StreamWriter(_currentFile, true, Encoding.UTF8))
 				{
-					writer.WriteLine($"[{log.Level.ToString()[0]}] {log.Time:yyyy/MM/dd HH:mm:ss.fff} {log.Text}");
+					var time = Settings.LocalTime ? log.Time.ToLocalTime() : log.Time;
+					writer.WriteLine($"[{log.Level.ToString()[0]}] {time:yyyy/MM/dd HH:mm:ss.fff} : {log.Text}");
 				}
 			}
 			catch
