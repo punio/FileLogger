@@ -29,7 +29,9 @@ Set it below File in the Logging section.
       "Default": "Debug"
     },
     "File": {
-      "LogLevel": "Debug",
+      "LogLevel": {
+        "default" : "Debug"
+      },
       "FileName": "test{0:d4}.log",
       "MaxFileSize": 10240, /* 10 kbyte */
       "RetainFileCount": 3,

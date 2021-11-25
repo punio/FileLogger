@@ -9,7 +9,7 @@ namespace FileLogger
 {
 	public class FileLoggerOptions
 	{
-		public LogLevel LogLevel { get; set; } = LogLevel.Information;
+		public FileLogLevel LogLevel { get; set; } = new FileLogLevel();
 
 		private string _outputFolder = null;
 		public string OutputFolder
@@ -49,5 +49,10 @@ namespace FileLogger
 		public FileLoggerOptions()
 		{
 		}
+	}
+
+	public class FileLogLevel
+	{
+		public LogLevel Default { get; set; } = LogLevel.Information;
 	}
 }

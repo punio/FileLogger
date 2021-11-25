@@ -21,7 +21,7 @@ namespace FileLogger
 
 		public override bool IsEnabled(LogLevel logLevel)
 		{
-			return logLevel != LogLevel.None && Settings.LogLevel != LogLevel.None && logLevel >= Settings.LogLevel;
+			return logLevel != LogLevel.None && Settings.LogLevel.Default != LogLevel.None && logLevel >= Settings.LogLevel.Default;
 		}
 
 		public override void WriteLog(LogEntry log)
