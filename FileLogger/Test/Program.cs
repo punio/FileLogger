@@ -24,6 +24,9 @@ namespace Test
 					configApp.SetBasePath(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName));
 					configApp.AddCommandLine(args);
 					configApp.AddJsonFile("appsettings.json");
+#if DEBUG
+					configApp.AddJsonFile("appsettings.Development.json");
+#endif
 				})
 				.ConfigureServices(services =>
 				{
@@ -34,7 +37,6 @@ namespace Test
 					logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
 					logging.ClearProviders();
 					logging.AddConsole();
-					logging.AddDebug();
 					logging.AddFileLogger();
 				})
 				.RunConsoleAsync();

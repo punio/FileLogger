@@ -27,7 +27,6 @@ namespace Test
 
 		public Task StopAsync(CancellationToken cancellationToken)
 		{
-			_timer.Dispose();
 			return Task.CompletedTask;
 		}
 
@@ -47,6 +46,22 @@ namespace Test
 			}
 
 			_logger.LogTrace("Trace");
+
+			ThreadPool.SetMaxThreads(100, 100);
+			for (var i = 0; i < 100; i++)
+			{
+				ThreadPool.QueueUserWorkItem(t => StressTest((int)t), i);
+			}
+			_timer.Dispose();
+		}
+
+		private void StressTest(int thread)
+		{
+			for (var i = 0; i < 50; i++)
+			{
+				Task.Delay(0).Wait();
+				_logger.LogInformation($"\t{thread}\t{i}");
+			}
 		}
 	}
 }

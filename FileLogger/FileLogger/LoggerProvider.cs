@@ -12,7 +12,7 @@ namespace FileLogger
 		protected IDisposable SettingsChangeToken;
 		IExternalScopeProvider _scopeProvider;
 
-		public void Dispose()
+		public virtual void Dispose()
 		{
 			SettingsChangeToken?.Dispose();
 			SettingsChangeToken = null;

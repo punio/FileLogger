@@ -262,3 +262,5 @@ __pycache__/
 
 \nuget
 */nuget.exe
+
+appsettings.Development.json
