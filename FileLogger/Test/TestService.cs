@@ -57,10 +57,13 @@ namespace Test
 
 		private void StressTest(int thread)
 		{
-			for (var i = 0; i < 50; i++)
+			for (var i = 0; i < 10; i++)
 			{
-				Task.Delay(0).Wait();
-				_logger.LogInformation($"\t{thread}\t{i}");
+				Thread.Sleep(100);
+				for (var j = 0; j < 10; j++)
+				{
+					_logger.LogInformation($"\t{thread}\t{i}");
+				}
 			}
 		}
 	}

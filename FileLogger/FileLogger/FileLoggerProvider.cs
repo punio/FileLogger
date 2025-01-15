@@ -23,7 +23,7 @@ namespace FileLogger
 		private void Initialize()
 		{
 			_currentFile = Path.Combine(Settings.OutputFolder, string.Format(Settings.FileName, 0));
-			_output = _logOutput.Buffer(TimeSpan.FromSeconds(1)).Subscribe(WriteCore);
+			_output = _logOutput.Buffer(TimeSpan.FromSeconds(0.5)).Subscribe(WriteCore);
 		}
 
 		public override void Dispose()
@@ -49,18 +49,6 @@ namespace FileLogger
 
 			_writing = true;
 
-			try
-			{
-				using var writer = new StreamWriter(_currentFile, true, Encoding.UTF8);
-				foreach (var log in logs)
-				{
-					var time = Settings.LocalTime ? log.Time.ToLocalTime() : log.Time;
-					writer.WriteLine($"[{log.Level.ToString()[0]}] {time:yyyy/MM/dd HH:mm:ss.fff} : {log.Text}");
-				}
-			}
-			catch
-			{
-			}
 			#region Backup
 			try
 			{
@@ -83,6 +71,19 @@ namespace FileLogger
 			{
 			}
 			#endregion
+			try
+			{
+				using var writer = new StreamWriter(_currentFile, true, Encoding.UTF8);
+				foreach (var log in logs)
+				{
+					var time = Settings.LocalTime ? log.Time.ToLocalTime() : log.Time;
+					writer.WriteLine($"[{log.Level.ToString()[0]}] {time:yyyy/MM/dd HH:mm:ss.fff} : {log.Text}");
+				}
+				writer.Close();
+			}
+			catch
+			{
+			}
 
 			_writing = false;
 		}

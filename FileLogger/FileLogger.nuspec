@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Punio.FileLogger</id>
-    <version>1.3.1</version>
+    <version>1.3.3</version>
     <title>FileLogger</title>
     <authors>punio</authors>
     <owners>punio</owners>
@@ -14,6 +14,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Simple file logger for ILogger</description>
     <releaseNotes>
+* 1.3.3    - Improved performance under high-load conditions
+* 1.3.2    - Improved performance under high-load conditions
 * 1.3.1    - Improved performance under high-load conditions
 * 1.3.0    - Remove .NET Standard 2.0
 * 1.2.0    - Changed the format of json to follow Visual Studio
