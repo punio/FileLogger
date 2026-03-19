@@ -21,7 +21,7 @@ namespace Test
 
 		public Task StartAsync(CancellationToken cancellationToken)
 		{
-			_timer = Observable.Interval(TimeSpan.FromSeconds(1)).Subscribe(_ => OnTimer());
+			_timer = Observable.Interval(TimeSpan.FromSeconds(5)).Subscribe(OnTimer);
 			return Task.CompletedTask;
 		}
 
@@ -30,22 +30,24 @@ namespace Test
 			return Task.CompletedTask;
 		}
 
-		private void OnTimer()
+		private void OnTimer(long count)
 		{
-			_logger.LogWarning("Warning");
-			_logger.LogInformation("Information");
-			_logger.LogCritical("Critical");
-			_logger.LogDebug("Debug");
+			_logger.LogWarning($"Warning {count}");
+			_logger.LogInformation($"Information {count}");
+			_logger.LogCritical($"Critical {count}");
+			_logger.LogDebug($"Debug {count}");
 			try
 			{
 				throw new Exception("Exception");
 			}
 			catch (Exception e)
 			{
-				_logger.LogError(e, "Error");
+				_logger.LogError(e, $"Error {count}");
 			}
 
-			_logger.LogTrace("Trace");
+			_logger.LogTrace($"Trace {count}");
+
+			return;
 
 			ThreadPool.SetMaxThreads(100, 100);
 			for (var i = 0; i < 100; i++)

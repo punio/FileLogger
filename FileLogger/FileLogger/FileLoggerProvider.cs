@@ -22,6 +22,8 @@ namespace FileLogger
 
 		private void Initialize()
 		{
+			if (_output != null) return;
+			System.Diagnostics.Debug.WriteLine($"Initialize FileLoggerProvider. OutputFolder={Settings.OutputFolder}, FileName={Settings.FileName}, MaxFileSize={Settings.MaxFileSize}, RetainFileCount={Settings.RetainFileCount}");
 			_currentFile = Path.Combine(Settings.OutputFolder, string.Format(Settings.FileName, 0));
 			_output = _logOutput.Buffer(TimeSpan.FromSeconds(0.5)).Subscribe(WriteCore);
 		}

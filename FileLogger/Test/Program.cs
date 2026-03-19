@@ -25,7 +25,7 @@ namespace Test
 					configApp.AddCommandLine(args);
 					configApp.AddJsonFile("appsettings.json");
 #if DEBUG
-					configApp.AddJsonFile("appsettings.Development.json");
+					configApp.AddJsonFile("appsettings.Development.json", false, true);
 #endif
 				})
 				.ConfigureServices(services =>
